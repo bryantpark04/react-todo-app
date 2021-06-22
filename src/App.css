@@ -4,6 +4,10 @@
   max-width: 60%;
 }
 
+.Header {
+  font-size: 50px;
+}
+
 td {
   white-space: nowrap;
 }
