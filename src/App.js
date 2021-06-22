@@ -1,12 +1,16 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import React from 'react';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 import Header from './Header';
 import TodoList from './TodoList';
 import TodoInput from './TodoInput';
-
-// should probably make a distinction between todo id and idx, since we're reordering
-let idx = 0;
+import StorageControl from './StorageControl';
 
 class App extends React.Component {
   constructor() {
@@ -16,13 +20,28 @@ class App extends React.Component {
     }
   }
 
+  loadTodos() {
+    const todoList = JSON.parse(localStorage.getItem("todos"));
+    if (todoList) this.setState({ todos: todoList })
+  }
+
+  saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+  }
+
   addTodo(text) {
     this.setState({
       todos: [
         ...this.state.todos,
-        { idx: idx++, text: text, done: false }
+        { idx: this.state.todos.length, text: text, done: false }
       ]
-    })
+    });
+  }
+
+  deleteTodo(idx) {
+    this.setState({
+      todos: this.state.todos.filter(todo => todo.idx !== idx)
+    });
   }
 
   swapTodos(idx1, idx2) {
@@ -52,13 +71,28 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ maxWidth: 300, alignSelf: 'center' }}>
-        <Header />
-        <div>
-          <TodoList todos={this.state.todos} swapTodos={(idx1, idx2) => this.swapTodos(idx1, idx2)} editTodo={(idx, newText) => this.editTodo(idx, newText)} toggleTodo={(idx) => this.toggleTodo(idx)} />
-          <TodoInput addTodo={(text) => this.addTodo(text)} />
-        </div>
-      </div >
+      <Container>
+        <Row>
+          <Col><Header /></Col>
+          <Col sm="auto"><StorageControl loadTodos={() => this.loadTodos()} saveTodos={() => this.saveTodos()} /></Col>
+        </Row>
+        <Row>
+          <Col>
+            <TodoList
+              todos={this.state.todos}
+              swapTodos={(idx1, idx2) => this.swapTodos(idx1, idx2)}
+              editTodo={(idx, newText) => this.editTodo(idx, newText)}
+              toggleTodo={(idx) => this.toggleTodo(idx)}
+              deleteTodo={(idx) => this.deleteTodo(idx)}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <TodoInput addTodo={(text) => this.addTodo(text)} />
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

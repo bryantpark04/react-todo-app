@@ -1,3 +1,5 @@
+import Button from "react-bootstrap/Button";
+
 const Todo = (props) => {
     const handleEdit = () => {
         const newText = prompt(`Enter new text for: \n${props.todo.text}`);
@@ -15,10 +17,11 @@ const Todo = (props) => {
             <td>{props.todo.text}</td>
             {
                 ["↑", "↓"].map((direction) => (
-                    <td><input type="button" value={direction} onClick={() => moveTodo(direction)} /></td>
+                    <td><Button variant="outline-dark" size="sm" onClick={() => moveTodo(direction)}>{direction}</Button></td>
                 ))
             }
-            <td><input type="button" value="Edit" onClick={handleEdit} /></td>
+            <td><Button variant="secondary" size="sm" onClick={handleEdit}>Edit</Button></td>
+            <td><Button variant="danger" size="sm" onClick={() => props.deleteTodo(props.todo.idx)}>Delete</Button></td>
         </tr>
     );
 }

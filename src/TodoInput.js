@@ -1,5 +1,9 @@
 import React from 'react';
 
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+
 class TodoInput extends React.Component {
     constructor(props) {
         super(props);
@@ -7,7 +11,7 @@ class TodoInput extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ text: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit(event) {
@@ -18,10 +22,12 @@ class TodoInput extends React.Component {
 
     render() {
         return (
-            <div>
-                <input type="text" value={this.state.text} onChange={(event) => this.handleChange(event)} />
-                <button onClick={(event) => this.handleSubmit(event)}>Add Todo</button>
-            </div>
+            <Form onSubmit={(event) => this.handleSubmit(event)}>
+                <Form.Row>
+                    <Col><Form.Control type="text" name="text" value={this.state.text} onChange={(event) => this.handleChange(event)} /></Col>
+                    <Col xs="auto"><Button type="submit">Add Todo</Button></Col>
+                </Form.Row>
+            </Form>
         )
     }
 }

@@ -5,10 +5,17 @@ import Todo from './Todo';
 const TodoList = (props) => {
     return (
         <div>
-            <Table striped bordered variant="dark">
+            <Table responsive striped size="sm">
                 <tbody>
                     {props.todos.map(todo => (
-                        <Todo key={todo.idx} swapTodos={props.swapTodos} todo={todo} editTodo={props.editTodo} onToggle={() => props.toggleTodo(todo.idx)} />
+                        <Todo
+                            key={todo.idx}
+                            swapTodos={props.swapTodos}
+                            todo={todo}
+                            editTodo={props.editTodo}
+                            onToggle={() => props.toggleTodo(todo.idx)}
+                            deleteTodo={props.deleteTodo}
+                        />
                     ))}
                 </tbody>
             </Table>

@@ -1,8 +1,10 @@
+import Col from 'react-bootstrap/Col';
+
 const Header = () => {
     return (
-        <div style={{ 'textAlign': 'center' }}>
-            <h1>Todo App</h1>
-        </div>
+        <Col className="Header">
+            <h1><strong>Todo App</strong></h1>
+        </Col>
     )
 }
 

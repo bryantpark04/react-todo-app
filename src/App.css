@@ -1,6 +1,17 @@
 #root {
   margin: auto;
-  display: flex;
-  justify-content: center;
-  max-width: 600px;
+  padding: auto;
+  max-width: 60%;
+}
+
+td {
+  white-space: nowrap;
+}
+td:nth-child(2) {
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
 }
