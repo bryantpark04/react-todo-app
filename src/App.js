@@ -7,10 +7,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
-import Header from './Header';
-import TodoList from './TodoList';
-import TodoInput from './TodoInput';
-import StorageControl from './StorageControl';
+import Header from './components/Header';
+import TodoList from './components/TodoList';
+import TodoInput from './components/TodoInput';
+import StorageControl from './components/StorageControl';
 
 class App extends React.Component {
   constructor() {
